@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class BaseBuilding : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public BuildingData data;
+    public BaseEnemy target;
+
+    private void Start()
     {
-        
+        Instantiate();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        ProcessEveryFrame();
     }
+
+    public virtual void Instantiate()
+    {
+        // TODO: cost building cost
+    }
+
+    public virtual void ProcessEveryFrame() { }
 }
