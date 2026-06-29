@@ -10,11 +10,29 @@ public class EnemySpawner : MonoBehaviour
     public int maxWaves = 2;
 
     public List<Wave> waves = new List<Wave>();
+    public List<BaseEnemy> enemies = new List<BaseEnemy>();
+
+    public static EnemySpawner instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
         maxWaves = waves.Count;
         StartCoroutine(WaveSpawner());
+    }
+
+    public void AddEnemyToList(BaseEnemy enemy)
+    {
+        enemies.Add(enemy);
+    }
+
+    public void RemoveEnemyFromList(BaseEnemy enemy)
+    {
+        enemies.Remove(enemy);
     }
 
     IEnumerator WaveSpawner()
@@ -28,7 +46,11 @@ public class EnemySpawner : MonoBehaviour
                 yield return new WaitForSeconds(miniWave.spawnDelay);
                 for(int i = 1; i <= miniWave.spawnNumber; i++)
                 {
-                    Instantiate(miniWave.enemyPrefab, spawnPoint.position, Quaternion.identity);
+                    GameObject newEnemy = Instantiate(miniWave.enemyPrefab, 
+                        spawnPoint.position, Quaternion.identity);
+                    // add enemy to list 
+                    AddEnemyToList(newEnemy.GetComponent<BaseEnemy>());
+
                     yield return new WaitForSeconds(miniWave.spawnInterval);
                 }
             }

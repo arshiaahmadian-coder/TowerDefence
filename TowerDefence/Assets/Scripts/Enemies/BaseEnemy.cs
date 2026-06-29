@@ -46,6 +46,7 @@ public class BaseEnemy : MonoBehaviour
             if (currentWaypoint >= WaypointManager.instance.waypoints.Count)
             {
                 // TODO: decrease player health
+                EnemySpawner.instance.RemoveEnemyFromList(this);
                 Destroy(gameObject);
             }
         }

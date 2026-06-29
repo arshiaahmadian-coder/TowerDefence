@@ -14306,6 +14306,7 @@ MonoBehaviour:
       spawnDelay: 10
       spawnInterval: 2
     startDelay: 15
+  enemies: []
 --- !u!1 &1517089647
 GameObject:
   m_ObjectHideFlags: 0
