@@ -4,6 +4,7 @@ public class BaseBuilding : MonoBehaviour
 {
     public BuildingData data;
     public BaseEnemy target;
+    public GameObject towerHead;
 
     private void Start()
     {

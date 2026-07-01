@@ -56,6 +56,29 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+
+    public BaseEnemy FindTarget(Transform searchPos, float searchRange)
+    {
+        float closestEnemyDistance = float.MaxValue;
+        BaseEnemy closestEnemy = null;
+        foreach(BaseEnemy enemy in enemies)
+        {
+            // its in tower range
+            if (Vector3.Distance(searchPos.position, enemy.transform.position) <= searchRange)
+            {
+                // distance between enemy and his next waypoint
+                float distance = Vector3.Distance(enemy.transform.position, 
+                    WaypointManager.instance.waypoints[enemy.currentWaypoint].transform.position);
+
+                if (distance < closestEnemyDistance)
+                {
+                    closestEnemy = enemy;
+                    closestEnemyDistance = distance;
+                }
+            }
+        }
+        return closestEnemy;
+    }
 }
 
 [Serializable]
